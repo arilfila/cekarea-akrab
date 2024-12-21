@@ -283,8 +283,8 @@
                             warningMessage.style.display = 'block';
                         } else {
                             warningMessage.style.display = 'none';
-                            const message = `Saya ingin membeli ${item.name} untuk nomor tujuan ${nomorTujuan}. Harga: ${item.price}.`;
-                            const whatsappUrl = `https://wa.me/6289510044680?text=${encodeURIComponent(message)}`;
+                            const message = `Beli paket *${item.name}* min,ini nomornya ${nomorTujuan}. Harga: *${item.price}*.`;
+                            const whatsappUrl = `https://wa.me/6285713431941?text=${encodeURIComponent(message)}`;
                             window.open(whatsappUrl, '_blank');
                         }
                     });
