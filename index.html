@@ -27,20 +27,30 @@
         }
 
         /* Container produk */
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 30px;
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s ease-in-out;
-        }
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+    text-align: center; /* Menambahkan agar logo berada di tengah */
+}
 
-        .container:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-        }
+/* Hover effect pada container */
+.container:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Menyesuaikan ukuran logo */
+.logo {
+    width: 200px; /* Ganti sesuai ukuran yang diinginkan */
+    height: auto;  /* Agar proporsi gambar tetap terjaga */
+    display: block;
+    margin: 0 auto; /* Agar logo berada di tengah */
+}
 
         h1 {
             font-size: 2.5em;
@@ -217,7 +227,7 @@
 <body>
 
     <div class="container">
-        <h1>Deliza Reload</h1>
+        <img src="logo.png" alt="Logo Deliza Reload" class="logo">
 
         <label for="kategoriSelect">Pilih Kategori:</label>
         <select id="kategoriSelect">
