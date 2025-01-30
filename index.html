@@ -3,314 +3,276 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Kategori dan Produk</title>
+    <title>Cek Area Akrab</title>
     <style>
-        /* Reset Margin dan Padding */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Latar belakang gradasi */
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradasi dari ungu ke biru */
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-            padding: 20px;
-            overflow-x: hidden;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
         }
 
-        /* Container produk */
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 30px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease-in-out;
-    text-align: center; /* Menambahkan agar logo berada di tengah */
-}
-
-/* Hover effect pada container */
-.container:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-}
-
-/* Menyesuaikan ukuran logo */
-.logo {
-    width: 200px; /* Ganti sesuai ukuran yang diinginkan */
-    height: auto;  /* Agar proporsi gambar tetap terjaga */
-    display: block;
-    margin: 0 auto; /* Agar logo berada di tengah */
-}
-
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 30px;
-            color: #333;
-            text-align: center;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* Styling untuk label dan input */
-        label {
-            font-size: 1.2em;
-            margin-bottom: 10px;
-            display: block;
-            color: #555;
-        }
-
-        select, input {
-            padding: 12px;
-            font-size: 1.1em;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            width: 100%;
-            max-width: 350px;
-            display: block;
-            margin-bottom: 25px;
-            transition: border-color 0.3s ease;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        select:focus, input:focus {
-            border-color: #007bff;
-            outline: none;
-        }
-
-        /* Grid untuk produk */
-        #produkList {
-            list-style-type: none;
-            padding-left: 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-
-        #produkList li {
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 40px;
             background-color: #ffffff;
-            border: 1px solid #ddd;
             border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-            position: relative;
-        }
-
-        #produkList li:hover {
-            transform: translateY(-7px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
         }
 
-        /* Warna setiap produk berbeda yang lebih mencolok */
-        #produkList li:nth-child(1) {
-            background: #ff6347; /* Tomato */
-            color: white;
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
         }
 
-        #produkList li:nth-child(2) {
-            background: #ffdc00; /* Yellow */
-            color: #333;
+        /* Deskripsi bagian atas */
+        .description {
+            font-size: 18px;
+            color: #34495e;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 500;
         }
 
-        #produkList li:nth-child(3) {
-            background: #32cd32; /* Lime Green */
-            color: white;
+        .input-container {
+            margin-bottom: 30px;
+            text-align: center;
         }
 
-        #produkList li:nth-child(4) {
-            background: #1e90ff; /* Dodger Blue */
-            color: white;
-        }
-
-        #produkList li:nth-child(5) {
-            background: #ff69b4; /* Hot Pink */
-            color: white;
-        }
-
-        #produkList li:nth-child(6) {
-            background: #ff8c00; /* Dark Orange */
-            color: white;
-        }
-
-        .deskripsi-produk {
-            display: none;
-            margin-top: 15px;
-            padding: 12px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
+        input[type="text"] {
+            width: 80%;
+            padding: 12px 20px;
+            border: 2px solid #ddd;
             border-radius: 8px;
-            text-align: left;
-            font-size: 1.1em;
-            color: #555;
+            font-size: 18px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
         }
 
-        .beli-btn {
-            display: none;
-            background-color: #28a745;
+        input[type="text"]:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        button {
+            width: 80%;
+            padding: 12px;
+            background-color: #3498db;
             color: white;
             border: none;
             border-radius: 8px;
-            padding: 12px 25px;
-            margin-top: 15px;
+            font-size: 16px;
             cursor: pointer;
-            font-size: 1.1em;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .beli-btn.enabled {
-            display: inline-block;
-        }
-
-        .beli-btn:hover {
-            background-color: #218838;
-            transform: scale(1.05);
-        }
-
-        .beli-btn:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-
-        .warning {
-            color: red;
-            font-size: 0.9em;
             margin-top: 10px;
         }
 
-        /* Responsif untuk layar kecil */
-        @media (max-width: 600px) {
-            .container {
-                padding: 15px;
-            }
-
-            select, input {
-                width: 100%;
-                max-width: none;
-            }
-
-            #produkList {
-                grid-template-columns: 1fr;
-            }
+        button:hover {
+            background-color: #2980b9;
         }
 
-        /* Responsif untuk layar besar */
-        @media (min-width: 1200px) {
-            .container {
-                padding: 40px;
-            }
-
-            select {
-                width: auto;
-            }
-
-            #produkList {
-                grid-template-columns: repeat(3, 1fr);
-            }
+        .area-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #ecf0f1;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            transition: background-color 0.3s;
         }
+
+        .area-section:hover {
+            background-color: #e3e9f0;
+        }
+
+        .area-section h2 {
+            margin: 0;
+            padding: 0;
+            font-size: 22px;
+            color: #2980b9;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .area-list {
+            margin-top: 10px;
+        }
+
+        .area-item {
+            padding: 12px;
+            margin: 6px 0;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .area-item:hover {
+            background-color: #3498db;
+            color: white;
+            border-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .no-result {
+            color: #e74c3c;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .area-section .area-list {
+            padding-left: 0;
+        }
+
+        .area-item {
+            list-style-type: none;
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <img src="logo.png" alt="Logo Deliza Reload" class="logo">
+<div class="container">
+    <h1>Cek Area Akrab</h1>
 
-        <label for="kategoriSelect">Pilih Kategori:</label>
-        <select id="kategoriSelect">
-            <option value="">--Pilih Kategori--</option>
-            <option value="akrab">Paket Akrab</option>
-        </select>
-
-        <label for="nomorTujuan">Nomor Tujuan:</label>
-        <input type="text" id="nomorTujuan" placeholder="Masukkan awalan 0" required>
-
-        <h2>Produk:</h2>
-        <ul id="produkList">
-            <!-- Produk akan ditampilkan di sini -->
-        </ul>
-
-        <div class="warning" id="warningMessage" style="display: none;">
-            Anda harus mengisi nomor tujuan sebelum membeli produk!
-        </div>
+    <!-- Deskripsi tentang Area Akrab -->
+    <div class="description">
+        Area Akrab adalah lokasi domisili yang terdeteksi oleh paket Akrab untuk pengisian kuota. Setiap area memiliki kuota yang berbeda-beda, tergantung pada wilayahnya.
     </div>
 
-    <script>
-        // Daftar produk berdasarkan kategori
-        const produk = {
-            akrab: [
-                { name: 'MINI', description: 'Area 1 : 40GB<br>Area 2 : 42GB<br>Area 3 : 47GB<br>Area 4 : 57GB<br><br><a href="http://bit.ly/area_akrab" target="_blank">Cek Area</a><br><br>Note : Wajib UNREG / HAPUS paket AKRAB yang masih aktif jika masih ada.', price: 'Rp 58.000' },
-                { name: 'BIG', description: 'Area 1 : 37GB<br>Area 2 : 40GB<br>Area 3 : 50GB<br>Area 4 : 74GB<br><br><a href="http://bit.ly/area_akrab" target="_blank">Cek Area</a><br><br>Note : Wajib UNREG / HAPUS paket AKRAB yang masih aktif jika masih ada.', price: 'Rp 65.000' },
-                { name: 'JUMBO', description: 'Area 1 : 67GB<br>Area 2 : 72GB<br>Area 3 : 85GB<br>Area 4 : 125GB<br><br><a href="http://bit.ly/area_akrab" target="_blank">Cek Area</a><br><br>Note : Wajib UNREG / HAPUS paket AKRAB yang masih aktif jika masih ada.', price: 'Rp 85.000' }
-            ]
-        };
+    <div class="input-container">
+        <input type="text" id="locationInput" placeholder="Masukkan kabupaten anda..." oninput="cekArea()"/>
+    </div>
+    
+    <div id="result"></div>
+</div>
 
-        const kategoriSelect = document.getElementById('kategoriSelect');
-        const produkList = document.getElementById('produkList');
-        const nomorTujuanInput = document.getElementById('nomorTujuan');
-        const warningMessage = document.getElementById('warningMessage');
+<script>
+    const lokasiData = {
+        "Banten": {
+            "Area 1": ["Kota Tangerang", "Kota Tangerang Selatan", "Kota Serang"],
+            "Area 2": ["Kab. Lebak", "Kab. Pandeglang", "Kab. Serang"],
+            "Area 3": ["Kab. Kepulauan Seribu"]
+        },
+        "Jawa Barat": {
+            "Area 1": ["Kab. Bandung", "Kab. Bandung Barat", "Kab. Kuningan", "Kab. Purwakarta", "Kota Cimahi", "Kota Bandung", "Kab. Subang"],
+            "Area 2": ["Kab. Garut", "Kab. Cirebon", "Kota Cirebon", "Kab. Indramayu"],
+            "Area 3": ["Kab. Ciamis", "Kab. Pangandaran", "Kab. Tasikmalaya", "Kota Banjar", "Kota Tasikmalaya", "Kota Depok", "Kab. Sumedang", "Kab. Bogor", "Kota Bogor", "Kota Bekasi", "Kab. Bekasi"],
+            "Area 4": ["Kab. Cianjur", "Kab. Karawang", "Kota Sukabumi", "Kab. Sukabumi"]
+        },
+        "Jawa Tengah": {
+            "Area 1": ["Kab. Boyolali", "Kota Surakarta", "Kab. Cilacap", "Kab. Kebumen", "Kota Semarang", "Kota Salatiga"],
+            "Area 2": ["Kab. Tegal", "Kab. Semarang", "Kota Tegal", "Kab. Brebes"],
+            "Area 3": ["Kab. Blora", "Kab. Rembang"],
+            "Area 4": ["Kab. Sukoharjo", "Kab. Purbalingga", "Kab. Klaten", "Kab. Wonogiri"]
+        },
+        // Tambahkan data lokasi lainnya sesuai dengan contoh data yang diberikan
+    };
 
-        // Menampilkan produk berdasarkan kategori
-        kategoriSelect.addEventListener('change', function() {
-            const kategori = kategoriSelect.value;
-            produkList.innerHTML = ''; // Menghapus produk sebelumnya
-            if (kategori && produk[kategori]) {
-                produk[kategori].forEach(item => {
-                    const li = document.createElement('li');
-                    li.textContent = item.name;
+    function tampilkanSemuaLokasi() {
+        const resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = ""; // Reset hasil pencarian
 
-                    const deskripsi = document.createElement('div');
-                    deskripsi.classList.add('deskripsi-produk');
-                    deskripsi.innerHTML = `<strong>Deskripsi:</strong> <br>${item.description} <br><strong><br>Harga:</strong> ${item.price}`;
+        // Menelusuri data lokasi dan menampilkannya
+        for (let provinsi in lokasiData) {
+            const areaDiv = document.createElement("div");
+            areaDiv.classList.add("area-section");
 
-                    const beliBtn = document.createElement('button');
-                    beliBtn.classList.add('beli-btn');
-                    beliBtn.textContent = 'Beli';
+            // Menelusuri area dalam setiap provinsi
+            for (let area in lokasiData[provinsi]) {
+                const kabupatenList = lokasiData[provinsi][area];
+                const areaHeader = document.createElement("h2");
+                areaHeader.innerText = `${area} - ${provinsi}`;
+                areaDiv.appendChild(areaHeader);
 
-                    li.addEventListener('click', function() {
-                        const isDescriptionVisible = deskripsi.style.display === 'block';
-                        deskripsi.style.display = isDescriptionVisible ? 'none' : 'block';
-                        beliBtn.classList.toggle('enabled', !isDescriptionVisible);
-                    });
+                const areaList = document.createElement("div");
+                areaList.classList.add("area-list");
 
-                    beliBtn.addEventListener('click', function(event) {
-                        event.stopPropagation(); // Mencegah li click event
-                        const nomorTujuan = nomorTujuanInput.value.trim();
-                        if (!nomorTujuan) {
-                            warningMessage.style.display = 'block';
-                        } else {
-                            warningMessage.style.display = 'none';
-                            const message = `Beli paket *${item.name}* min,ini nomornya ${nomorTujuan}. Harga: *${item.price}*.`;
-                            const whatsappUrl = `https://wa.me/6285713431941?text=${encodeURIComponent(message)}`;
-                            window.open(whatsappUrl, '_blank');
-                        }
-                    });
-
-                    li.appendChild(deskripsi);
-                    li.appendChild(beliBtn);
-                    produkList.appendChild(li);
+                // Tampilkan kabupaten yang ada di dalam area tersebut
+                kabupatenList.forEach(kabupaten => {
+                    const item = document.createElement("div");
+                    item.classList.add("area-item");
+                    item.innerText = kabupaten;
+                    areaList.appendChild(item);
                 });
-            }
-        });
 
-        // Menangani input nomor tujuan
-        nomorTujuanInput.addEventListener('input', function() {
-            warningMessage.style.display = nomorTujuanInput.value.trim() ? 'none' : 'block';
-        });
-    </script>
+                areaDiv.appendChild(areaList);
+            }
+
+            resultDiv.appendChild(areaDiv);
+        }
+    }
+
+    function cekArea() {
+        const input = document.getElementById("locationInput").value.trim().toLowerCase();
+        const resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = ""; // Reset hasil pencarian
+
+        if (input === "") {
+            tampilkanSemuaLokasi(); // Jika kolom pencarian kosong, tampilkan semua lokasi
+            return;
+        }
+
+        let found = false;
+
+        // Menelusuri data lokasi
+        for (let provinsi in lokasiData) {
+            const areaDiv = document.createElement("div");
+            areaDiv.classList.add("area-section");
+
+            let areaFound = false;
+
+            // Menelusuri area dalam setiap provinsi
+            for (let area in lokasiData[provinsi]) {
+                const kabupatenList = lokasiData[provinsi][area];
+
+                // Cek apakah ada kecocokan pada kabupaten atau area
+                const matchingKabupaten = kabupatenList.filter(kabupaten => kabupaten.toLowerCase().includes(input));
+                if (matchingKabupaten.length > 0 || area.toLowerCase().includes(input)) {
+                    areaFound = true;
+                    const areaHeader = document.createElement("h2");
+                    areaHeader.innerText = `${area} - ${provinsi}`;
+                    areaDiv.appendChild(areaHeader);
+
+                    const areaList = document.createElement("div");
+                    areaList.classList.add("area-list");
+
+                    // Tampilkan kabupaten yang cocok
+                    matchingKabupaten.forEach(kabupaten => {
+                        const item = document.createElement("div");
+                        item.classList.add("area-item");
+                        item.innerText = kabupaten;
+                        areaList.appendChild(item);
+                    });
+
+                    areaDiv.appendChild(areaList);
+                }
+            }
+
+            if (areaFound) {
+                resultDiv.appendChild(areaDiv);
+                found = true;
+            }
+        }
+
+        if (!found) {
+            resultDiv.innerHTML = "<div class='no-result'>Lokasi tidak ditemukan, coba dengan nama yang berbeda.</div>";
+        }
+
+        // Scroll ke hasil pencarian
+        if (found) {
+            resultDiv.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    }
+
+    // Tampilkan semua lokasi saat halaman pertama kali dimuat
+    window.onload = tampilkanSemuaLokasi;
+
+</script>
 
 </body>
 </html>
