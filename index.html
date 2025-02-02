@@ -154,36 +154,66 @@
 <script>
     const lokasiData = {
         "Banten": {
-            "Area 1": ["Kota Tangerang", "Kota Tangerang Selatan", "Kota Serang"],
-            "Area 2": ["Kab. Lebak", "Kab. Pandeglang", "Kab. Serang"],
-            "Area 3": ["Kab. Kepulauan Seribu"]
-        },
-        "Jawa Barat": {
-            "Area 1": ["Kab. Bandung", "Kab. Bandung Barat", "Kab. Kuningan", "Kab. Purwakarta", "Kota Cimahi", "Kota Bandung", "Kab. Subang"],
-            "Area 2": ["Kab. Garut", "Kab. Cirebon", "Kota Cirebon", "Kab. Indramayu"],
-            "Area 3": ["Kab. Ciamis", "Kab. Pangandaran", "Kab. Tasikmalaya", "Kota Banjar", "Kota Tasikmalaya", "Kota Depok", "Kab. Sumedang", "Kab. Bogor", "Kota Bogor", "Kota Bekasi", "Kab. Bekasi"],
-            "Area 4": ["Kab. Cianjur", "Kab. Karawang", "Kota Sukabumi", "Kab. Sukabumi"]
-        },
-        "Jawa Tengah": {
-            "Area 1": ["Kab. Boyolali", "Kota Surakarta", "Kab. Cilacap", "Kab. Kebumen", "Kota Semarang", "Kota Salatiga"],
-            "Area 2": ["Kab. Tegal", "Kab. Semarang", "Kota Tegal", "Kab. Brebes"],
-            "Area 3": ["Kab. Blora", "Kab. Rembang"],
-            "Area 4": ["Kab. Sukoharjo", "Kab. Purbalingga", "Kab. Klaten", "Kab. Wonogiri"]
-        },
-        "Jawa Timur": {
         "Area 2": [
-            "Kab. Bangkalan", "Kab. Pamekasan", "Kab. Sampang", "Kab. Sumenep", 
-            "Kab. Sidoarjo", "Kota Surabaya", "Kab. Banyuwangi", "Kab. Probolinggo", 
-            "Kota Probolinggo", "Kab. Pacitan"
+            "Kab. Lebak", "Kab. Pandeglang", "Kab. Serang", "Kota Cilegon", 
+            "Kota Serang", "Kota Tangerang Selatan", "Kota Tangerang", "Kab. Tangerang",
+            "Kota Jakarta Barat", "Kota Jakarta Pusat", "Kota Jakarta Selatan", 
+            "Kota Jakarta Timur", "Kota Jakarta Utara"
         ],
-        "Area 3": ["Kab. Lumajang"],
+        "Area 3": ["Kab. Kepulauan Seribu"]
+    },
+    "Jawa Barat": {
+        "Area 1": [
+            "Kab. Bandung", "Kab. Bandung Barat", "Kab. Kuningan", "Kab. Majalengka", 
+            "Kab. Purwakarta", "Kota Cimahi", "Kota Bandung", "Kab. Subang"
+        ],
+        "Area 2": [
+            "Kab. Garut", "Kab. Cirebon", "Kota Cirebon", "Kab. Indramayu"
+        ],
+        "Area 3": [
+            "Kab. Ciamis", "Kab. Pangandaran", "Kab. Tasikmalaya", "Kota Banjar", 
+            "Kota Tasikmalaya", "Kota Depok", "Kab. Sumedang", "Kab. Bogor", "Kota Bogor", 
+            "Kota Bekasi", "Kab. Bekasi"
+        ],
         "Area 4": [
-            "Kab. Blitar", "Kota Blitar", "Kab. Jombang", "Kab. Kediri", "Kota Kediri", 
-            "Kab. Lamongan", "Kab. Ngawi", "Kab. Mojokerto", "Kota Mojokerto", "Kab. Magetan", 
-            "Kab. Gresik", "Kab. Tulungagung", "Kab. Nganjuk", "Kota Pasuruan", "Kab. Pasuruan", 
-            "Kab. Bojonegoro", "Kab. Madiun", "Kab. Bondowoso", "Kab. Tuban", "Kota Madiun", 
-            "Kab. Situbondo", "Kab. Jember", "Kota Malang", "Kab. Malang", "Kab. Ponorogo", 
-            "Kota Batu", "Kab. Trenggalek"
+            "Kab. Cianjur", "Kab. Karawang", "Kota Sukabumi", "Kab. Sukabumi"
+        ]
+    },
+    "Jawa Tengah": {
+        "Area 2": [
+            "Kab. Boyolali", "Kota Surakarta", "Kab. Cilacap", "Kab. Kebumen", "Kota Semarang", 
+            "Kota Salatiga", "Kab. Tegal", "Kab. Semarang", "Kota Tegal", "Kab. Brebes", 
+            "Kab. Pemalang", "Kab. Kendal"
+        ],
+        "Area 3": [
+            "Kab. Grobogan", "Kab. Blora", "Kab. Rembang"
+        ],
+        "Area 4": [
+            "Kab. Sukoharjo", "Kab. Purbalingga", "Kab. Klaten", "Kab. Wonogiri", "Kab. Banyumas", 
+            "Kab. Sragen", "Kab. Karanganyar", "Kota Pekalongan", "Kab. Pekalongan", "Kab. Batang", 
+            "Kab. Kudus", "Kota Magelang", "Kab. Magelang", "Kab. Temanggung", "Kab. Banjarnegara", 
+            "Kab. Wonosobo", "Kab. Jepara", "Kab. Demak", "Kab. Purworejo", "Kab. Pati"
+        ]
+    },
+    "Jawa Timur": {
+        "Area 2": [
+            "Kab. Bangkalan", "Kab. Pamekasan", "Kab. Sampang", "Kab. Sumenep", "Kab. Sidoarjo", 
+            "Kota Surabaya", "Kab. Banyuwangi", "Kab. Probolinggo", "Kota Probolinggo", "Kab. Pacitan"
+        ],
+        "Area 3": [
+            "Kab. Lumajang"
+        ],
+        "Area 4": [
+            "Kab. Blitar", "Kota Blitar", "Kab. Jombang", "Kab. Kediri", "Kota Kediri", "Kab. Lamongan", 
+            "Kab. Ngawi", "Kab. Mojokerto", "Kota Mojokerto", "Kab. Magetan", "Kab. Gresik", 
+            "Kab. Tulungagung", "Kab. Nganjuk", "Kota Pasuruan", "Kab. Pasuruan", "Kab. Bojonegoro", 
+            "Kab. Madiun", "Kab. Bondowoso", "Kab. Tuban", "Kota Madiun", "Kab. Situbondo", "Kab. Jember", 
+            "Kota Malang", "Kab. Malang", "Kab. Ponorogo", "Kota Batu", "Kab. Trenggalek"
+        ]
+    },
+    "Yogyakarta": {
+        "Area 1": [
+            "Kab. Bantul", "Kab. Gunungkidul", "Kab. Kulon Progo", "Kab. Sleman", "Kota Yogyakarta"
         ]
     },
     "Yogyakarta": {
