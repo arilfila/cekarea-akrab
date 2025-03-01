@@ -1,599 +1,577 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cek Area Akrab</title>
+    <title>Area Checker</title>
     <style>
+        /* General Body Styling */
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-        }
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #330861, #103370);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .container {
-            max-width: 900px;
-            margin: 50px auto;
-            padding: 40px;
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        }
+/* Centered Container */
+.container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+    background: linear-gradient(to right, #6a11cb, #2575fc); /* Menambahkan gradient yang sama seperti body */
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgb(255, 255, 255);
+}
 
+
+        /* Title Styling */
         h1 {
+            font-size: 40px;
             text-align: center;
-            color: #2c3e50;
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 20px;
+            color: #ffffff;
+            margin-bottom: 10px;
         }
 
-        /* Deskripsi bagian atas */
-        .description {
-            font-size: 18px;
-            color: #34495e;
+        h2 {
+            font-size: 20px;
             text-align: center;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-
-        .input-container {
+            color: #ffffff;
             margin-bottom: 30px;
-            text-align: center;
+            font-weight: normal;
         }
 
-        input[type="text"] {
+        /* Search Bar Styling */
+        .search-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .search-input {
             width: 80%;
-            padding: 12px 20px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            padding: 15px;
             font-size: 18px;
-            box-sizing: border-box;
-            transition: border-color 0.3s;
+            border-radius: 10px;
+            border: 2px solid #3498db;
+            background-color: #ecf0f1;
+            transition: all 0.3s ease;
         }
 
-        input[type="text"]:focus {
-            border-color: #3498db;
+        .search-input:focus {
             outline: none;
+            border-color: #2ecc71;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        button {
-            width: 80%;
-            padding: 12px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 10px;
+        /* Card Layout for Data */
+        .area-card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
         }
 
-        button:hover {
-            background-color: #2980b9;
-        }
-
-        .area-section {
-            margin-top: 30px;
+        .area-card {
+            width: 300px;
             padding: 20px;
             background-color: #ecf0f1;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            transition: background-color 0.3s;
-        }
-
-        .area-section:hover {
-            background-color: #e3e9f0;
-        }
-
-        .area-section h2 {
-            margin: 0;
-            padding: 0;
-            font-size: 22px;
-            color: #2980b9;
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
-
-        .area-list {
-            margin-top: 10px;
-        }
-
-        .area-item {
-            padding: 12px;
-            margin: 6px 0;
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
-            cursor: pointer;
         }
 
-        .area-item:hover {
-            background-color: #3498db;
-            color: white;
-            border-color: #2980b9;
-            transform: translateY(-2px);
+        .area-card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transform: scale(1.05);
         }
 
-        .no-result {
-            color: #e74c3c;
-            font-style: italic;
+        .area-card h3 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .area-card p {
+            font-size: 16px;
+            color: #34495e;
+        }
+
+        .area-card .area {
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        /* Footer Styling */
+        footer {
             text-align: center;
+            font-size: 14px;
+            color: #34495e;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .area-section .area-list {
-            padding-left: 0;
+        footer a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
         }
 
-        .area-item {
-            list-style-type: none;
+        footer a:hover {
+            color: #e74c3c;
         }
-
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h1>Cek Area Akrab</h1>
+    <div class="container">
+        <h1>Cek Area Arab</h1>
+        <h2>Temukan area daerahmu untuk pembelian paket Akrab</h2>
 
-    <!-- Deskripsi tentang Area Akrab -->
-    <div class="description">
-        Area Akrab adalah lokasi domisili yang terdeteksi oleh paket Akrab untuk pengisian kuota. Setiap area memiliki kuota yang berbeda-beda, tergantung pada wilayahnya.
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" onkeyup="searchTable()" placeholder="Search by City/Region...">
+        </div>
+
+        <!-- Area Cards Layout -->
+        <div class="area-card-container" id="areaCards">
+            <div class="area-card">
+                <h3>Banten</h3>
+                <p>Kota Tangerang Selatan, Kota Tangerang, Kab. Tangerang, Kab. Pandeglang, Kab. Lebak, Kab. Serang, Kota Serang, Kota Cilegon</p>
+                <p class="area">Area 2</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>DI Yogyakarta</h3>
+                <p>Kab. Kulon Progo, Kota Yogyakarta, Kab. Sleman, Kab. Bantul, Kab. Gunungkidul</p>
+                <p class="area">Area 1</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>DKI Jakarta</h3>
+                <p>Kota Jakarta Pusat, Kota Jakarta Selatan, Kota Jakarta Barat, Kota Jakarta Timur, Kota Jakarta Utara</p>
+                <p class="area">Area 2</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>DKI Jakarta</h3>
+                <p>Kab. Kepulauan Seribu</p>
+                <p class="area">Area 3</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Jawa Barat</h3>
+                <p>Kab. Bandung, Kab. Kuningan, Kab. Purwakarta, Kota Bandung</p>
+                <p class="area">Area 1</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Jawa Barat</h3>
+                <p>Kab. Bandung Barat, Kota Cimahi, Kab. Cirebon, Kota Cirebon, Kab. Indramayu, Kab. Subang</p>
+                <p class="area">Area 2</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Jawa Barat</h3>
+                <p>Kab. Bogor, Kota Bogor, Kota Depok, Kota Bekasi, Kota Banjar, Kab. Ciamis, Kota Tasikmalaya, Kab. Majalengka, Kab. Sumedang, Kab. Bekasi, Kab. Tasikmalaya, Kab. Garut</p>
+                <p class="area">Area 3</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Jawa Barat</h3>
+                <p>Kab. Cianjur, Kab. Pangandaran, Kab. Karawang, Kota Sukabumi, Kab. Sukabumi</p>
+                <p class="area">Area 4</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Jawa Tengah</h3>
+                <p>Kab. Tegal, Kota Surakarta, Kota Tegal, Kab. Brebes, Kab. Kebumen, Kab. Pemalang, Kota Semarang</p>
+                <p class="area">Area 2</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Jawa Tengah</h3>
+                <p>Kab. Boyolali, Kota Salatiga, Kab. Semarang, Kab. Cilacap, Kab. Grobogan, Kab. Kendal, Kab. Rembang</p>
+                <p class="area">Area 3</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Jawa Tengah</h3>
+                <p>Kota Pekalongan, Kab. Pekalongan, Kab. Batang, Kab. Purbalingga, Kab. Kudus, Kab. Sukoharjo, Kab. Klaten, Kota Magelang, Kab. Banyumas, Kab. Banyumas, Kab. Magelang, Kab. Temanggung, Kab. Sragen, Kab. Banjarnegara, Kab. Karanganyar, Kab. Wonosobo, Kab. Jepara, Kab. Demak, Kab. Purworejo, Kab. Blora, Kab. Wonogiri, Kab. Pati</p>
+                <p class="area">Area 4</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Jawa Timur</h3>
+                <p>Kota Probolinggo, Kab. Bangkalan, Kab. Sidoarjo, Kab. Banyuwangi, Kota Surabaya, Kab. Sampang, Kab. Pamekasan, Kab. Sumenep, Kab. Pacitan</p>
+                <p class="area">Area 2</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Jawa Timur</h3>
+                <p>Kab. Lumajang, Kab. Probolinggo</p>
+                <p class="area">Area 3</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Jawa Timur</h3>
+                <p>Kab. Jombang, Kota Blitar, Kab. Blitar, Kota Kediri, Kab. Lamongan, Kab. Kediri, Kab. Ngawi, Kab. Mojokerto, Kota Mojokerto, Kab. Magetan, Kab. Gresik, Kab. Tulungagung, Kab. Nganjuk, Kab. Pasuruan, Kota Pasuruan, Kab. Bojonegoro, Kab. Madiun, Kab. Bondowoso, Kab. Tuban, Kota Madiun, Kab. Situbondo, Kab. Jember, Kota Malang, Kab. Malang, Kab. Ponorogo, Kota Batu, Kab. Trenggalek</p>
+                <p class="area">Area 4</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Bengkulu</h3>
+                <p>Kab. Seluma</p>
+                <p class="area">Area 3</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Bengkulu</h3>
+                <p>Kab. Bengkulu Selatan, Kab. Kaur, Kab. Lebong, Kab. Rejang Lebong, Kab. Bengkulu Tengah, Kota Bengkulu, Kab. Bengkulu Utara, Kab. Kepahiang, Kab. Muko Muko</p>
+                <p class="area">Area 4</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Jambi</h3>
+                <p>Kab. Batanghari, Kota Jambi, Kab. Tanjung Jabung Barat, Kab. Muaro Jambi, Kab. Sarolangun</p>
+                <p class="area">Area 3</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Jambi</h3>
+                <p>Kab. Tanjung Jabung Timur, Kab. Kerinci, Kab. Bungo, Kab. Tebo, Kab. Merangin, Kota Sungai Penuh</p>
+                <p class="area">Area 4</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Kepulauan Bangka Belitung</h3>
+                <p>Kab. Bangka Selatan, Kota Pangkal Pinang, Kab. Belitung, Kab. Belitung Timur</p>
+                <p class="area">Area 2</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Kepulauan Bangka Belitung</h3>
+                <p>Kab. Bangka, Kab. Bangka Tengah, Kab. Bangka Barat</p>
+                <p class="area">Area 3</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Kepulauan Riau</h3>
+                <p>Kota Batam</p>
+                <p class="area">Area 2</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Kepulauan Riau</h3>
+                <p>Kab. Karimun, Kab. Bintan, Kota Tanjung Pinang</p>
+                <p class="area">Area 3</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Kepulauan Riau</h3>
+                <p>Kab. Lingga, Kab. Kepulauan Anambas, Kab. Natuna</p>
+                <p class="area">Area 4</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Lampung</h3>
+                <p>Kab. Lampung Tengah, Kab. Pringsewu, Kota Metro, Kab. Pesawaran, Kab. Lampung Selatan, Kota Bandar Lampung</p>
+                <p class="area">Area 3</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Lampung</h3>
+                <p>Kab. Lampung Barat, Kab. Lampung Timur, Kab. Tulang Bawang Barat, Kab. Way Kanan, Kab. Tulang Bawang, Kab. Tanggamus, Kab. Pesisir Barat, Kab. Lampung Utara, Kab. Mesuji</p>
+                <p class="area">Area 4</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Nanggroe Aceh Darussalam</h3>
+                <p>Kab. Aceh Barat Daya, Kab. Aceh Besar, Kota Sabang, Kab. Gayo Lues</p>
+                <p class="area">Area 2</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Nanggroe Aceh Darussalam</h3>
+                <p>Kab. Aceh Jaya, Kab. Aceh Selatan, Kab. Aceh Tenggara, Kab. Nagan Raya, Kota Banda Aceh</p>
+                <p class="area">Area 3</p>
+            </div>
+            <div class="area-card">
+                <h3>Nanggroe Aceh Darussalam</h3>
+                <p>Kab. Aceh Barat, Kab. Aceh Singkil, Kab. Aceh Tamiang, Kab. Aceh Tengah, Kota Subulussalam, Kab. Bener Meriah, Kab. Aceh Utara, Kota Lhokseumawe, Kab. Pidie, Kab. Aceh Timur, Kab. Simeulue, Kota Langsa, Kab. Bireuen, Kab. Pidie Jaya</p>
+                <p class="area">Area 4</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Riau</h3>
+                <p>Kota Pekanbaru</p>
+                <p class="area">Area 2</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Riau</h3>
+                <p>Kab. Kuantan Singingi, Kab. Pelalawan, Kab. Kampar, Kab. Siak, Kota Dumai, Kab. Rokan Hilir, Kab. Indragiri Hulu, Kab. Kepulauan Meranti, Kab. Bengkalis</p>
+                <p class="area">Area 3</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Riau</h3>
+                <p>Kab. Rokan Hulu, Kab. Indragiri Hilir</p>
+                <p class="area">Area 4</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Sumatera Barat</h3>
+                <p>Kab. Kepulauan Mentawai</p>
+                <p class="area">Area 2</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Sumatera Barat</h3>
+                <p>Kota Payakumbuh, Kota Padang Panjang, Kab. Sijunjung, Kab. Padang Pariaman, Kota Padang, Kab. Solok Selatan</p>
+                <p class="area">Area 3</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Sumatera Barat</h3>
+                <p>Kab. Pasaman Barat, Kab. Pasaman, Kab. Lima Puluh Kota, Kab. Tanah Datar, Kab. Dharmasraya, Kota Solok, Kab. Agam, Kab. Solok, Kota Bukittinggi, Kota Pariaman, Kota Sawahlunto, Kab. Pesisir Selatan</p>
+                <p class="area">Area 4</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Sumatera Selatan</h3>
+                <p>Kab. Ogan Komering Ilir, Kab. Penukal Abab Lematang Ilir, Kab. Banyuasin, Kota Palembang, Kab. Ogan Ilir</p>
+                <p class="area">Area 3</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Sumatera Selatan</h3>
+                <p>Kab. Ogan Komering Ulu Timur, Kab. Ogan Komering Ulu Selatan, Kab. Ogan Komering Ulu, Kab. Musi Rawas, Kab. Musi Rawas Utara, Kab. Empat Lawang, Kota Pagar Alam, Kota Lubuk Linggau, Kab. Musi Banyuasin, Kab. Muara Enim, Kab. Lahat, Kota Prabumulih</p>
+                <p class="area">Area 4</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Sumatera Utara</h3>
+                <p>Kab. Karo, Kota Medan, Kab. Dairi</p>
+                <p class="area">Area 2</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Sumatera Utara</h3>
+                <p>Kota Binjai, Kota Tebing Tinggi, Kab. Serdang Bedagai, Kab. Langkat, Kab. Deli Serdang, Kab. Batu Bara, Kota Tanjung Balai, Kab. Asahan, Kota Gunungsitoli, Kab. Nias Barat, Kab. Nias Selatan, Kab. Nias Utara</p>
+                <p class="area">Area 3</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Sumatera Utara</h3>
+                <p>Kab. Pakpak Bharat, Kab. Mandailing Natal, Kab. Padang Lawas, Kab. Labuhanbatu Utara, Kota Padangsidimpuan, Kab. Tapanuli Selatan, Kab. Labuhanbatu Selatan, Kab. Labuhanbatu, Kab. Tapanuli Utara, Kab. Padang Lawas Utara, Kab. Humbang Hasundutan, Kab. Simalungun, Kab. Toba Samosir, Kota Pematangsiantar, Kab. Tapanuli Tengah, Kab. Samosir, Kota Sibolga, Kab. Nias</p>
+                <p class="area">Area 4</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Kalimantan Barat</h3>
+                <p>Kab. Sekadau, Kab. Kapuas Hulu, Kab. Sintang, Kab. Bengkayang, Kab. Melawi, Kab. Sambas, Kab. Sanggau, Kab. Kubu Raya, Kota Pontianak, Kab. Kayong Utara, Kab. Landak, Kab. Mempawah, Kota Singkawang, Kab. Ketapang</p>
+                <p class="area">Area 4</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Kalimantan Selatan</h3>
+                <p>Kab. Hulu Sungai Tengah, Kab. Tapin, Kab. Hulu Sungai Utara, Kab. Tabalong, Kota Banjarmasin, Kab. Banjar, Kab. Tanah Bumbu, Kota Banjarbaru, Kab. Hulu Sungai Selatan</p>
+                <p class="area">Area 2</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Kalimantan Selatan</h3>
+                <p>Kab. Balangan, Kab. Barito Kuala, Kab. Tanah Laut, Kab. Kotabaru</p>
+                <p class="area">Area 3</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Kalimantan Tengah</h3>
+                <p>Kab. Kapuas, Kab. Pulang Pisau, Kota Palangkaraya</p>
+                <p class="area">Area 3</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Kalimantan Tengah</h3>
+                <p>Kab. Seruyan, Kab. Kotawaringin Barat, Kab. Katingan, Kab. Kotawaringin Timur, Kab. Sukamara, Kab. Lamandau, Kab. Murung Raya, Kab. Barito Timur, Kab. Barito Utara, Kab. Barito Selatan, Kab. Gunung Mas</p>
+                <p class="area">Area 4</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Kalimantan Timur</h3>
+                <p>Kab. Penajam Paser Utara, Kota Balikpapan, Kab. Paser, Kab. Kutai Kartanegara, Kota Samarinda, Kota Bontang, Kab. Berau, Kab. Kutai Timur, Kab. Kutai Barat, Kab. Mahakam Ulu</p>
+                <p class="area">Area 4</p>
+            </div>
+            <div class="area-card">
+                <h3>Kalimantan Utara</h3>
+                <p>Kab. Tana Tidung, Kab. Malinau, Kab. Bulungan, Kota Tarakan, Kab. Nunukan</p>
+                <p class="area">Area 4</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Gorontalo</h3>
+                <p>Kab. Pahuwato, Kab. Boalemo, Kab. Gorontalo, Kota Gorontalo, Kab. Gorontalo Utara, Kab. Bone Bolango</p>
+                <p class="area">Area 4</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Sulawesi Barat</h3>
+                <p>Kab. Mamuju Tengah</p>
+                <p class="area">Area 2</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Sulawesi Barat</h3>
+                <p>Kab. Majene, Kab. Polewali Mandar, Kab. Mamuju Utara</p>
+                <p class="area">Area 3</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Sulawesi Barat</h3>
+                <p>Kab. Mamuju, Kab. Mamasa</p>
+                <p class="area">Area 4</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Sulawesi Selatan</h3>
+                <p>Kab. Barru, Kota Pare Pare, Kab. Pinrang</p>
+                <p class="area">Area 2</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Sulawesi Selatan</h3>
+                <p>Kab. Sinjai, Kab. Enrekang, Kab. Sidenreng Rappang, Kab. Luwu Timur, Kab. Soppeng, Kab. Tana Toraja</p>
+                <p class="area">Area 3</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Sulawesi Selatan</h3>
+                <p>Kab. Kepulauan Selayar, Kab. Takalar, Kab. Jeneponto, Kab. Bulukumba, Kab. Pangkajene Kepulauan, Kota Makassar, Kab. Gowa, Kab. Maros, Kab. Bone, Kab. Wajo, Kab. Luwu, Kab. Luwu Utara, Kota Palopo, Kab. Toraja Utara</p>
+                <p class="area">Area 4</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Sulawesi Tengah</h3>
+                <p>Kab. Banggai Kepulauan, Kab. Banggai Laut, Kota Palu, Kab. Toli Toli, Kab. Tojo Una Una, Kab. Morowali, Kab. Morowali Utara</p>
+                <p class="area">Area 3</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Sulawesi Tengah</h3>
+                <p>Kab. Banggai, Kab. Parigi Moutong, Kab. Donggala, Kab. Sigi, Kab. Poso, Kab. Buol</p>
+                <p class="area">Area 4</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Sulawesi Tenggara</h3>
+                <p>Kab. Konawe Kepulauan, Kab. Konawe Utara, Kab. Buton Utara, Kab. Wakatobi</p>
+                <p class="area">Area 2</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Sulawesi Tenggara</h3>
+                <p>Kota Bau Bau, Kab. Muna, Kab. Buton Selatan, Kab. Buton Tengah, Kab. Muna Barat</p>
+                <p class="area">Area 3</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Sulawesi Tenggara</h3>
+                <p>Kab. Kolaka, Kab. Kolaka Utara, Kab. Konawe, Kab. Konawe Selatan, Kota Kendari, Kab. Kolaka Timur, Kab. Buton, Kab. Bombana</p>
+                <p class="area">Area 4</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Sulawesi Utara</h3>
+                <p>Kab. Bolaang Mongondow, Kab. Bolaang Mongondow Selatan, Kota Kotamobagu, Kab. Minahasa Selatan, Kab. Bolaang Mongondow Timur, Kab. Minahasa Tenggara, Kab. Bolaang Mongondow Utara, Kota Tomohon, Kab. Minahasa, Kota Manado, Kab. Minahasa Utara, Kota Bitung, Kab. Kepulauan Sangihe, Kab. Kepulauan Talaud, Kab. Siau Tagulandang Biaro</p>
+                <p class="area">Area 4</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Bali</h3>
+                <p>Kab. Jembrana, Kab. Buleleng</p>
+                <p class="area">Area 1</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Bali</h3>
+                <p>Kab. Badung, Kab. Karangasem, Kab. Tabanan, Kab. Bangli, Kab. Gianyar, Kab. Klungkung, Kota Denpasar</p>
+                <p class="area">Area 2</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Nusa Tenggara Barat</h3>
+                <p>Kab. Lombok Barat, Kab. Lombok Timur, Kota Mataram, Kab. Lombok Tengah, Kab. Lombok Utara, Kab. Sumbawa Barat, Kab. Sumbawa, Kota Bima, Kab. Dompu</p>
+                <p class="area">Area 2</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Nusa Tenggara Barat</h3>
+                <p>Kab. Bima</p>
+                <p class="area">Area 4</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Nusa Tenggara Timur</h3>
+                <p>Kab. Alor, Kota Kupang, Kab. Kupang, Kab. Malaka, Kab. Manggarai Barat, Kab. Timor Tengah Selatan, Kab. Belu, Kab. Sikka, Kab. Timor Tengah Utara, Kab. Lembata, Kab. Manggarai Timur, Kab. Ende, Kab. Sumba Barat Daya, Kab. Rote Ndao, Kab. Nagekeo, Kab. Flores Timur, Kab. Ngada, Kab. Sumba Tengah, Kab. Manggarai, Kab. Sumba Barat, Kab. Sumba Timur, Kab. Sabu Raijua</p>
+                <p class="area">Area 4</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Maluku</h3>
+                <p>Kab. Maluku Tenggara Barat, Kab. Kepulauan Aru, Kota Tual, Kab. Seram Bagian Barat, Kab. Maluku Tengah, Kab. Seram Bagian Timur, Kota Ambon, Kab. Maluku Tenggara, Kab. Maluku Barat Daya, Kab. Buru Selatan, Kab. Buru</p>
+                <p class="area">Area 1</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Maluku Utara</h3>
+                <p>Kab. Halmahera Barat, Kab. Halmahera Utara, Kab. Kepulauan Sula, Kab. Halmahera Timur, Kab. Pulau Taliabu, Kab. Halmahera Selatan, Kota Tidore Kepulauan, Kota Ternate, Kab. Halmahera Tengah, Kab. Pulau Morotai</p>
+                <p class="area">Area 1</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Papua</h3>
+                <p>Kab. Asmat, Kab. Jayapura, Kab. Mimika, Kab. Keerom, Kab. Biak Numfor, Kota Jayapura, Kab. Kepulauan Yapen, Kab. Boven Digoel, Kab. Merauke, Kab. Deiyai, Kab. Dogiyai, Kab. Intan Jaya, Kab. Jayawijaya, Kab. Lanny Jaya, Kab. Mamberamo Raya, Kab. Mamberamo Tengah, Kab. Mappi, Kab. Nabire, Kab. Nduga, Kab. Paniai, Kab. Pegunungan Bintang, Kab. Puncak, Kab. Puncak Jaya, Kab. Sarmi, Kab. Supiori, Kab. Tolikara, Kab. Waropen, Kab. Yahukimo, Kab. Yalimo</p>
+                <p class="area">Area 1</p>
+            </div>
+            
+            <div class="area-card">
+                <h3>Papua Barat</h3>
+                <p>Kab. Teluk Bintuni, Kab. Sorong Selatan, Kab. Sorong, Kab. Teluk Wondama, Kota Sorong, Kab. Manokwari, Kab. Fak Fak, Kab. Kaimana, Kab. Manokwari Selatan, Kab. Maybrat, Kab. Pegunungan Arfak, Kab. Raja Ampat, Kab. Tambrauw</p>
+                <p class="area">Area 1</p>
+            </div>
+            
+            <!-- More cards can be added here -->
+        </div>
     </div>
 
-    <div class="input-container">
-        <input type="text" id="locationInput" placeholder="Masukkan kabupaten anda..." oninput="cekArea()"/>
-    </div>
-    
-    <div id="result"></div>
-</div>
+    <!-- Footer -->
+    <footer>
+        <p>Created with ❤️ by <a href="#">SRC-Store</a></p>
+    </footer>
 
-<script>
-    const lokasiData = {
-        "Banten": {
-        "Area 2": [
-            "Kab. Lebak", "Kab. Pandeglang", "Kab. Serang", "Kota Cilegon", 
-            "Kota Serang", "Kota Tangerang Selatan", "Kota Tangerang", "Kab. Tangerang",
-            "Kota Jakarta Barat", "Kota Jakarta Pusat", "Kota Jakarta Selatan", 
-            "Kota Jakarta Timur", "Kota Jakarta Utara"
-        ],
-        "Area 3": ["Kab. Kepulauan Seribu"]
-    },
-    "Jawa Barat": {
-        "Area 1": [
-            "Kab. Bandung", "Kab. Bandung Barat", "Kab. Kuningan", "Kab. Majalengka", 
-            "Kab. Purwakarta", "Kota Cimahi", "Kota Bandung", "Kab. Subang"
-        ],
-        "Area 2": [
-            "Kab. Garut", "Kab. Cirebon", "Kota Cirebon", "Kab. Indramayu"
-        ],
-        "Area 3": [
-            "Kab. Ciamis", "Kab. Pangandaran", "Kab. Tasikmalaya", "Kota Banjar", 
-            "Kota Tasikmalaya", "Kota Depok", "Kab. Sumedang", "Kab. Bogor", "Kota Bogor", 
-            "Kota Bekasi", "Kab. Bekasi"
-        ],
-        "Area 4": [
-            "Kab. Cianjur", "Kab. Karawang", "Kota Sukabumi", "Kab. Sukabumi"
-        ]
-    },
-    "Jawa Tengah": {
-        "Area 2": [
-            "Kab. Boyolali", "Kota Surakarta", "Kab. Cilacap", "Kab. Kebumen", "Kota Semarang", 
-            "Kota Salatiga", "Kab. Tegal", "Kab. Semarang", "Kota Tegal", "Kab. Brebes", 
-            "Kab. Pemalang", "Kab. Kendal"
-        ],
-        "Area 3": [
-            "Kab. Grobogan", "Kab. Blora", "Kab. Rembang"
-        ],
-        "Area 4": [
-            "Kab. Sukoharjo", "Kab. Purbalingga", "Kab. Klaten", "Kab. Wonogiri", "Kab. Banyumas", 
-            "Kab. Sragen", "Kab. Karanganyar", "Kota Pekalongan", "Kab. Pekalongan", "Kab. Batang", 
-            "Kab. Kudus", "Kota Magelang", "Kab. Magelang", "Kab. Temanggung", "Kab. Banjarnegara", 
-            "Kab. Wonosobo", "Kab. Jepara", "Kab. Demak", "Kab. Purworejo", "Kab. Pati"
-        ]
-    },
-    "Jawa Timur": {
-        "Area 2": [
-            "Kab. Bangkalan", "Kab. Pamekasan", "Kab. Sampang", "Kab. Sumenep", "Kab. Sidoarjo", 
-            "Kota Surabaya", "Kab. Banyuwangi", "Kab. Probolinggo", "Kota Probolinggo", "Kab. Pacitan"
-        ],
-        "Area 3": [
-            "Kab. Lumajang"
-        ],
-        "Area 4": [
-            "Kab. Blitar", "Kota Blitar", "Kab. Jombang", "Kab. Kediri", "Kota Kediri", "Kab. Lamongan", 
-            "Kab. Ngawi", "Kab. Mojokerto", "Kota Mojokerto", "Kab. Magetan", "Kab. Gresik", 
-            "Kab. Tulungagung", "Kab. Nganjuk", "Kota Pasuruan", "Kab. Pasuruan", "Kab. Bojonegoro", 
-            "Kab. Madiun", "Kab. Bondowoso", "Kab. Tuban", "Kota Madiun", "Kab. Situbondo", "Kab. Jember", 
-            "Kota Malang", "Kab. Malang", "Kab. Ponorogo", "Kota Batu", "Kab. Trenggalek"
-        ]
-    },
-    "Yogyakarta": {
-        "Area 1": [
-            "Kab. Bantul", "Kab. Gunungkidul", "Kab. Kulon Progo", "Kab. Sleman", "Kota Yogyakarta"
-        ]
-    },
-    "Yogyakarta": {
-        "Area 1": [
-            "Kab. Bantul", "Kab. Gunungkidul", "Kab. Kulon Progo", "Kab. Sleman", "Kota Yogyakarta"
-        ]
-    },
-    "Aceh": {
-        "Area 2": [
-            "Kab. Aceh Barat", "Kab. Aceh Barat Daya", "Kab. Aceh Besar", "Kab. Aceh Jaya", 
-            "Kab. Aceh Selatan", "Kab. Aceh Tenggara", "Kota Sabang", "Kab. Nagan Raya", 
-            "Kota Banda Aceh", "Kab. Gayo Lues"
-        ],
-        "Area 3": [
-            "Kab. Aceh Tengah", "Kab. Aceh Utara", "Kota Lhokseumawe", "Kab. Pidie", 
-            "Kab. Aceh Timur", "Kab. Bireuen", "Kab. Pidie Jaya"
-        ],
-        "Area 4": [
-            "Kab. Aceh Singkil", "Kab. Aceh Tamiang", "Kota Subulussalam", "Kab. Bener Meriah", 
-            "Kab. Simeulue", "Kota Langsa"
-        ]
-    },
-    "Bengkulu": {
-        "Area 3": [
-            "Kab. Seluma", "Kab. Bengkulu Tengah", "Kota Bengkulu", "Kab. Bengkulu Utara", "Kab. Kepahiang"
-        ],
-        "Area 4": [
-            "Kab. Bengkulu Selatan", "Kab. Kaur", "Kab. Lebong", "Kab. Rejang Lebong", "Kab. Muko Muko"
-        ]
-    },
-    "Jambi": {
-        "Area 2": [
-            "Kab. Batanghari", "Kab. Muaro Jambi", "Kab. Tanjung Jabung Barat", "Kota Jambi"
-        ],
-        "Area 3": [
-            "Kab. Tebo", "Kab. Sarolangun", "Kab. Bungo"
-        ],
-        "Area 4": [
-            "Kab. Tanjung Jabung Timur", "Kota Sungai Penuh", "Kab. Kerinci", "Kab. Merangin"
-        ]
-    },
-    "Kepulauan Bangka Belitung": {
-        "Area 2": [
-            "Kab. Bangka", "Kab. Bangka Barat", "Kab. Bangka Selatan", "Kab. Bangka Tengah", 
-            "Kota Pangkal Pinang", "Kab. Belitung", "Kab. Belitung Timur"
-        ]
-    },
-    "Kepulauan Riau": {
-        "Area 2": [
-            "Kab. Bintan", "Kab. Karimun", "Kota Tanjung Pinang", "Kota Batam"
-        ],
-        "Area 4": [
-            "Kab. Kepulauan Anambas", "Kab. Lingga", "Kab. Natuna"
-        ]
-    },
-    "Lampung": {
-        "Area 2": [
-            "Kab. Lampung Selatan", "Kab. Pesawaran", "Kota Bandar Lampung"
-        ],
-        "Area 3": [
-            "Kab. Lampung Tengah", "Kab. Pringsewu", "Kota Metro"
-        ],
-        "Area 4": [
-            "Kab. Lampung Timur", "Kab. Tulang Bawang Barat", "Kab. Tulang Bawang", "Kab. Mesuji", 
-            "Kab. Lampung Barat", "Kab. Way Kanan", "Kab. Tanggamus", "Kab. Pesisir Barat", 
-            "Kab. Lampung Utara"
-        ]
-    },
-    "Riau": {
-        "Area 2": [
-            "Kab. Bengkalis", "Kab. Indragiri Hulu", "Kab. Kampar", "Kab. Kepulauan Meranti", 
-            "Kab. Kuantan Singingi", "Kab. Pelalawan", "Kab. Rokan Hilir", "Kab. Siak", 
-            "Kota Dumai", "Kota Pekanbaru"
-        ],
-        "Area 4": [
-            "Kab. Rokan Hulu", "Kab. Indragiri Hilir"
-        ]
-    },
-    "Sumatera Barat": {
-        "Area 2": [
-            "Kab. Agam", "Kab. Kepulauan Mentawai", "Kab. Lima Puluh Kota", "Kab. Padang Pariaman", 
-            "Kab. Pasaman", "Kab. Pasaman Barat", "Kab. Pesisir Selatan", "Kab. Sijunjung", 
-            "Kab. Solok", "Kab. Solok Selatan", "Kab. Tanah Datar", "Kota Bukittinggi", "Kota Padang", 
-            "Kota Padang Panjang", "Kota Pariaman", "Kota Payakumbuh", "Kota Solok"
-        ],
-        "Area 4": [
-            "Kab. Dharmas Raya", "Kota Sawah Lunto"
-        ]
-    },
-    "Sumatera Selatan": {
-        "Area 2": [
-            "Kab. Banyuasin", "Kab. Musi Banyuasin", "Kab. Ogan Ilir", "Kab. Ogan Komering Ilir", 
-            "Kota Palembang"
-        ],
-        "Area 3": [
-            "Kab. Ogan Komering Ulu Timur", "Kab. Musi Rawas", "Kab. Musi Rawas Utara", 
-            "Kab. Empat Lawang", "Kota Pagar Alam", "Kota Lubuk Linggau", 
-            "Kab. Penukal Abab Lematang Ilir", "Kab. Muara Enim", "Kab. Lahat", "Kota Prabumulih"
-        ],
-        "Area 4": [
-            "Kab. Ogan Komering Ulu", "Kab. Ogan Komering Ulu Selatan"
-        ]
-    },
-    "Sumatera Utara": {
-        "Area 2": [
-            "Kota Binjai", "Kota Tebing Tinggi", "Kab. Karo", "Kab. Serdang Bedagai", "Kab. Langkat", 
-            "Kota Medan", "Kab. Dairi", "Kab. Deli Serdang", "Kab. Batu Bara", "Kota Tanjung Balai", 
-            "Kab. Asahan"
-        ],
-        "Area 3": [
-            "Kab. Mandailing Natal", "Kota Padangsidimpuan", "Kab. Tapanuli Selatan", "Kab. Labuhanbatu", 
-            "Kab. Tapanuli Utara", "Kab. Padang Lawas Utara", "Kab. Simalungun", "Kab. Toba Samosir", 
-            "Kota Pematangsiantar", "Kab. Tapanuli Tengah", "Kab. Samosir", "Kota Sibolga", 
-            "Kota Gunungsitoli", "Kab. Nias Barat", "Kab. Nias Selatan", "Kab. Nias Utara"
-        ],
-        "Area 4": [
-            "Kab. Padang Lawas", "Kab. Labuhan Batu Selatan", "Kab. Labuhan Batu Utara", 
-            "Kab. Humbang Hasundutan", "Kab. Nias", "Kab. Pakpak Bharat"
-        ]
-    },
-    "Kalimantan Barat": {
-        "Area 4": [
-            "Kab. Kayong Utara", "Kab. Ketapang", "Kab. Sekadau", "Kab. Kapuas Hulu", 
-            "Kab. Sintang", "Kab. Bengkayang", "Kab. Melawi", "Kab. Sambas", "Kab. Sanggau", 
-            "Kab. Kubu Raya", "Kota Pontianak", "Kab. Landak", "Kab. Mempawah", "Kota Singkawang"
-        ]
-    },
-    "Kalimantan Selatan": {
-        "Area 2": [
-            "Kab. Balangan", "Kab. Banjar", "Kab. Barito Kuala", "Kab. Hulu Sungai Selatan", 
-            "Kab. Hulu Sungai Tengah", "Kab. Hulu Sungai Utara", "Kab. Kotabaru", "Kab. Tabalong", 
-            "Kab. Tanah Bumbu", "Kab. Tanah Laut", "Kab. Tapin", "Kota Banjarbaru", "Kota Banjarmasin"
-        ]
-    },
-    "Kalimantan Tengah": {
-        "Area 2": [
-            "Kab. Kapuas", "Kab. Pulang Pisau", "Kota Palangkaraya"
-        ],
-        "Area 4": [
-            "Kab. Katingan", "Kab. Murung Raya", "Kab. Barito Timur", "Kab. Barito Utara", 
-            "Kab. Barito Selatan", "Kab. Gunung Mas", "Kab. Seruyan", "Kab. Kotawaringin Barat", 
-            "Kab. Kotawaringin Timur", "Kab. Sukamara", "Kab. Lamandau"
-        ]
-    },
-    "Kalimantan Timur": {
-        "Area 4": [
-            "Kab. Kutai Kartanegara", "Kota Samarinda", "Kota Bontang", "Kab. Berau", 
-            "Kab. Kutai Timur", "Kab. Kutai Barat", "Kab. Mahakam Ulu"
-        ]
-    },
-    "Kalimantan Utara": {
-        "Area 4": [
-            "Kab. Tana Tidung", "Kab. Malinau", "Kab. Bulungan", "Kota Tarakan", 
-            "Kab. Nunukan", "Kab. Penajam Paser Utara", "Kab. Paser", "Kota Balikpapan"
-        ]
-    },
-    "Bali": {
-        "Area 1": [
-            "Kab. Jembrana", "Kab. Buleleng"
-        ],
-        "Area 2": [
-            "Kab. Badung", "Kab. Bangli", "Kab. Gianyar", "Kab. Karangasem", "Kab. Klungkung", 
-            "Kab. Tabanan", "Kota Denpasar"
-        ]
-    },
-    "Nusa Tenggara Barat": {
-        "Area 2": [
-            "Kab. Dompu", "Kab. Lombok Barat", "Kab. Lombok Tengah", "Kab. Lombok Timur", 
-            "Kab. Lombok Utara", "Kab. Sumbawa", "Kab. Sumbawa Barat", "Kota Bima", "Kota Mataram"
-        ],
-        "Area 4": [
-            "Kab. Bima"
-        ]
-    },
-    "Nusa Tenggara Timur": {
-        "Area 4": [
-            "Kab. Alor", "Kab. Belu", "Kab. Ende", "Kab. Flores Timur", "Kab. Kupang", "Kab. Lembata", 
-            "Kab. Malaka", "Kab. Manggarai", "Kab. Manggarai Barat", "Kab. Manggarai Timur", 
-            "Kab. Nagekeo", "Kab. Ngada", "Kab. Rote Ndao", "Kab. Sabu Raijua", "Kab. Sikka", 
-            "Kab. Sumba Barat", "Kab. Sumba Barat Daya", "Kab. Sumba Tengah", "Kab. Sumba Timur", 
-            "Kab. Timor Tengah Selatan", "Kab. Timor Tengah Utara", "Kota Kupang"
-        ]
-    },
-    "Maluku": {
-        "Area 1": [
-            "Kab. Buru", "Kab. Buru Selatan", "Kab. Kepulauan Aru", "Kab. Maluku Barat Daya", 
-            "Kab. Maluku Tengah", "Kab. Maluku Tenggara", "Kab. Maluku Tenggara Barat", 
-            "Kab. Seram Bagian Barat", "Kab. Seram Bagian Timur", "Kota Ambon", "Kota Tual"
-        ]
-    },
-    "Maluku Utara": {
-        "Area 1": [
-            "Kab. Halmahera Barat", "Kab. Halmahera Selatan", "Kab. Halmahera Tengah", 
-            "Kab. Halmahera Timur", "Kab. Halmahera Utara", "Kab. Kepulauan Sula", 
-            "Kab. Pulau Morotai", "Kab. Pulau Taliabu", "Kota Ternate", "Kota Tidore Kepulauan"
-        ]
-    },
-    "Gorontalo": {
-        "Area 4": [
-            "Kab. Boalemo", "Kab. Bone Bolango", "Kab. Gorontalo", "Kab. Gorontalo Utara", 
-            "Kab. Pahuwato", "Kota Gorontalo"
-        ]
-    },
-    "Sulawesi Barat": {
-        "Area 2": [
-            "Kab. Majene", "Kab. Mamuju Tengah", "Kab. Polewali Mandar"
-        ],
-        "Area 3": [
-            "Kab. Mamuju Utara"
-        ],
-        "Area 4": [
-            "Kab. Mamasa", "Kab. Mamuju"
-        ]
-    },
-    "Sulawesi Selatan": {
-        "Area 2": [
-            "Kab. Barru", "Kab. Pinrang", "Kota Pare Pare"
-        ],
-        "Area 3": [
-            "Kab. Bantaeng", "Kab. Sinjai", "Kab. Wajo", "Kab. Enrekang", "Kab. Sidenreng Rappang", 
-            "Kab. Luwu Timur", "Kab. Soppeng", "Kab. Tana Toraja"
-        ],
-        "Area 4": [
-            "Kab. Bone", "Kab. Luwu", "Kab. Luwu Utara", "Kota Palopo", "Kab. Toraja Utara", 
-            "Kab. Kepulauan Selayar", "Kab. Takalar", "Kab. Jeneponto", "Kab. Bulukumba", 
-            "Kab. Pangkajene Kepulauan", "Kota Makassar", "Kab. Gowa", "Kab. Maros"
-        ]
-    },
-    "Sulawesi Tengah": {
-        "Area 3": [
-            "Kab. Banggai", "Kab. Banggai Kepulauan", "Kab. Banggai Laut", "Kab. Donggala", 
-            "Kab. Morowali", "Kab. Morowali Utara", "Kab. Parigi Moutong", "Kab. Poso", 
-            "Kab. Sigi", "Kab. Tojo UnaUna", "Kab. ToliToli", "Kota Palu"
-        ],
-        "Area 4": [
-            "Kab. Buol"
-        ]
-    },
-    "Sulawesi Tenggara": {
-        "Area 2": [
-            "Kab. Buton Utara", "Kab. Konawe Kepulauan", "Kab. Konawe Utara", "Kab. Wakatobi"
-        ],
-        "Area 3": [
-            "Kota Bau Bau", "Kab. Muna", "Kab. Buton Selatan", "Kab. Buton Tengah", "Kab. Muna Barat"
-        ],
-        "Area 4": [
-            "Kab. Kolaka", "Kab. Kolaka Utara", "Kab. Konawe", "Kab. Konawe Selatan", 
-            "Kota Kendari", "Kab. Kolaka Timur", "Kab. Buton", "Kab. Bombana"
-        ]
-    },
-    "Sulawesi Utara": {
-        "Area 4": [
-            "Kab. Bolaang Mongondow", "Kab. Bolaang Mongondow Selatan", "Kab. Bolaang Mongondow Timur", 
-            "Kota Kotamobagu", "Kab. Minahasa Selatan", "Kab. Minahasa Tenggara", 
-            "Kab. Bolaang Mongondow Utara", "Kota Tomohon", "Kab. Minahasa", "Kota Manado", 
-            "Kab. Minahasa Utara", "Kota Bitung", "Kab. Kepulauan Sangihe", "Kab. Kepulauan Talaud", 
-            "Kab. Siau Tagulandang Biaro"
-        ]
-    },
-    "Papua": {
-        "Area 1": [
-            "Kab. Asmat", "Kab. Biak Numfor", "Kab. Boven Digoel", "Kab. Deiyai", "Kab. Dogiyai", 
-            "Kab. Intan Jaya", "Kab. Jayapura", "Kab. Jayawijaya", "Kab. Keerom", "Kab. Kepulauan Yapen", 
-            "Kab. Lanny Jaya", "Kab. Mamberamo Raya", "Kab. Mamberamo Tengah", "Kab. Mappi", "Kab. Merauke", 
-            "Kab. Mimika", "Kab. Nabire", "Kab. Nduga", "Kab. Paniai", "Kab. Pegunungan Bintang", 
-            "Kab. Puncak", "Kab. Puncak Jaya", "Kab. Sarmi", "Kab. Supiori", "Kab. Tolikara", "Kab. Waropen", 
-            "Kab. Yahukimo", "Kab. Yalimo", "Kota Jayapura"
-        ]
-    },
-    "Papua Barat": {
-        "Area 1": [
-            "Kab. Fak Fak", "Kab. Kaimana", "Kab. Manokwari", "Kab. Manokwari Selatan", "Kab. Maybrat", 
-            "Kab. Pegunungan Arfak", "Kab. Raja Ampat", "Kab. Sorong", "Kab. Sorong Selatan", "Kab. Tambrauw", 
-            "Kab. Teluk Bintuni", "Kab. Teluk Wondama", "Kota Sorong"
-        ]
-    }
+    <script>
+        // Search Function for Card Layout
+        function searchTable() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const cards = document.getElementsByClassName('area-card');
 
-        // Tambahkan data lokasi lainnya sesuai dengan contoh data yang diberikan
-    };
-
-    function tampilkanSemuaLokasi() {
-        const resultDiv = document.getElementById("result");
-        resultDiv.innerHTML = ""; // Reset hasil pencarian
-
-        // Menelusuri data lokasi dan menampilkannya
-        for (let provinsi in lokasiData) {
-            const areaDiv = document.createElement("div");
-            areaDiv.classList.add("area-section");
-
-            // Menelusuri area dalam setiap provinsi
-            for (let area in lokasiData[provinsi]) {
-                const kabupatenList = lokasiData[provinsi][area];
-                const areaHeader = document.createElement("h2");
-                areaHeader.innerText = `${area} - ${provinsi}`;
-                areaDiv.appendChild(areaHeader);
-
-                const areaList = document.createElement("div");
-                areaList.classList.add("area-list");
-
-                // Tampilkan kabupaten yang ada di dalam area tersebut
-                kabupatenList.forEach(kabupaten => {
-                    const item = document.createElement("div");
-                    item.classList.add("area-item");
-                    item.innerText = kabupaten;
-                    areaList.appendChild(item);
-                });
-
-                areaDiv.appendChild(areaList);
-            }
-
-            resultDiv.appendChild(areaDiv);
-        }
-    }
-
-    function cekArea() {
-        const input = document.getElementById("locationInput").value.trim().toLowerCase();
-        const resultDiv = document.getElementById("result");
-        resultDiv.innerHTML = ""; // Reset hasil pencarian
-
-        if (input === "") {
-            tampilkanSemuaLokasi(); // Jika kolom pencarian kosong, tampilkan semua lokasi
-            return;
-        }
-
-        let found = false;
-
-        // Menelusuri data lokasi
-        for (let provinsi in lokasiData) {
-            const areaDiv = document.createElement("div");
-            areaDiv.classList.add("area-section");
-
-            let areaFound = false;
-
-            // Menelusuri area dalam setiap provinsi
-            for (let area in lokasiData[provinsi]) {
-                const kabupatenList = lokasiData[provinsi][area];
-
-                // Cek apakah ada kecocokan pada kabupaten atau area
-                const matchingKabupaten = kabupatenList.filter(kabupaten => kabupaten.toLowerCase().includes(input));
-                if (matchingKabupaten.length > 0 || area.toLowerCase().includes(input)) {
-                    areaFound = true;
-                    const areaHeader = document.createElement("h2");
-                    areaHeader.innerText = `${area} - ${provinsi}`;
-                    areaDiv.appendChild(areaHeader);
-
-                    const areaList = document.createElement("div");
-                    areaList.classList.add("area-list");
-
-                    // Tampilkan kabupaten yang cocok
-                    matchingKabupaten.forEach(kabupaten => {
-                        const item = document.createElement("div");
-                        item.classList.add("area-item");
-                        item.innerText = kabupaten;
-                        areaList.appendChild(item);
-                    });
-
-                    areaDiv.appendChild(areaList);
-                }
-            }
-
-            if (areaFound) {
-                resultDiv.appendChild(areaDiv);
-                found = true;
+            for (let i = 0; i < cards.length; i++) {
+                let card = cards[i];
+                let text = card.textContent || card.innerText;
+                card.style.display = text.toLowerCase().indexOf(filter) > -1 ? '' : 'none';
             }
         }
-
-        if (!found) {
-            resultDiv.innerHTML = "<div class='no-result'>Lokasi tidak ditemukan, coba dengan nama yang berbeda.</div>";
-        }
-
-        // Scroll ke hasil pencarian
-        if (found) {
-            resultDiv.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-    }
-
-    // Tampilkan semua lokasi saat halaman pertama kali dimuat
-    window.onload = tampilkanSemuaLokasi;
-
-</script>
+    </script>
 
 </body>
+
 </html>
